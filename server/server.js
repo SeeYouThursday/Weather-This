@@ -1,6 +1,6 @@
-const express = require('express');
-const path = require('path');
-const db = require('./config/connection');
+import express from 'express';
+import path from 'path';
+import db from './config/connection';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 
