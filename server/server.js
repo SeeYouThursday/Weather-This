@@ -7,6 +7,7 @@ import { ApolloServer } from '@apollo/server';
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
+const PORT = 3001;
 // import { typeDefs, resolvers } from './schema/index.js';
 import typeDefs from './schema/typeDefs.js';
 import resolvers from './schema/resolvers.js';
@@ -22,7 +23,8 @@ const server = new ApolloServer({
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
-  app.get('*', (req, res) => {
+  app.get('*', (_, res) => {
+    // Remove 'req' parameter
     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
   });
 
@@ -39,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 await server.start();
 
 app.use(
-  'graphql',
+  '/graphql',
   cors(),
   express.json(),
   expressMiddleware(server, {
@@ -47,5 +49,5 @@ app.use(
   })
 );
 
-await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
-console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+await new Promise((resolve) => httpServer.listen({ port: 3001 }, resolve));
+console.log(`🚀 Server ready at http://localhost:3001/graphql`);
