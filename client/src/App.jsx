@@ -1,4 +1,5 @@
-//Import Necessary Files
+// Import Necessary Files
+// Remove the unused import statement for 'React'
 import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
@@ -7,9 +8,11 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-// import './assets/css/App.css';
+// import { ComplexNavbar } from './components/Nav.jsx';
+import WeatherNav from './components/WeatherNav.jsx';
+import nightCity from './assets/images/backgrounds/night_city.svg';
 
-//Making GraphQL Link
+// Making GraphQL Link
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -32,11 +35,32 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const style = {
+  background: {
+    backgroundImage: `url(${nightCity})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    height: '90vh',
+    zIndex: -1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+};
+
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <Outlet />
-    </ApolloProvider>
+    <>
+      <ApolloProvider client={client}>
+        {' '}
+        <WeatherNav />
+        <div style={style.background}>
+          <Outlet />
+        </div>
+      </ApolloProvider>
+    </>
   );
 }
 

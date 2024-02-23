@@ -3,7 +3,7 @@ type User {
     _id: ID
     email: String
     password: String
-    savedCities: [String]
+    savedCities: [String] # //??Should the array here use a schema to store extra data i.e. lat/long
 }
 
 type Auth {
