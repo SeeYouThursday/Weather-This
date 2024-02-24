@@ -19,25 +19,28 @@ import Logo from '../assets/images/WeatherThisLogo.png';
 export default function LandingPage() {
   const style = {
     backgroundImage: `url(${Logo})`,
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    height: '30vh',
-    width: '40vh',
+    backgroundColor: 'white',
+    minHeight: '300px',
+    minWidth: '300px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'center',
     borderRadius: 5,
-    backgroundColor: 'white',
+    margin: 'auto 0',
   };
 
   return (
-    <>
+    <div className="shadow-xl shadow-blue-gray-900/50">
+      <Typography color="blue" gradient>
+        We look outside so you don&apos;t have to!
+      </Typography>
       <div style={style}>
-        {/* <img src={Logo} /> */}
         <Search />
       </div>
-    </>
+    </div>
   );
 }

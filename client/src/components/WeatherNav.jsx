@@ -1,6 +1,8 @@
 import { Navbar, Typography, Avatar } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
-import Logo from '../assets/images/WeatherThisLogo.png'; //?? Nav Btns
+import Logo from '../assets/images/WeatherThisLogo.png';
+
+//?? Nav Btns
 const navBtns = [
   { name: 'Login', route: '/login' },
   { name: 'Sign Up', route: '/signup' },
@@ -13,7 +15,7 @@ const genNavBtns = navBtns.map((btn, index) => {
       key={index}
       as={Link}
       to={btn.route}
-      variant="h4"
+      variant="h5"
       color="blue"
       gradient
       style={{ padding: 5 }}
@@ -31,15 +33,25 @@ export default function WeatherNav() {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'flex-end',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-            margin: 0,
-            borderRadius: 5,
-            padding: 5,
+            flexWrap: 'nowrap',
+            justifyContent: 'space-evenly',
           }}
         >
-          <Avatar src={Logo} alt="logo" />
-          {genNavBtns}
+          <a href="/">
+            <Avatar src={Logo} alt="weather this logo" variant="rounded" />
+          </a>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+              margin: 0,
+              borderRadius: 5,
+              // padding: 5,
+            }}
+          >
+            {genNavBtns}
+          </div>
         </div>
       </Navbar>
     </>

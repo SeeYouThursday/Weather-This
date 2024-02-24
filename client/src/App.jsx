@@ -44,7 +44,7 @@ const style = {
     height: '90vh',
     zIndex: -1,
     display: 'flex',
-    flexDirection: 'column',
+    // flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
