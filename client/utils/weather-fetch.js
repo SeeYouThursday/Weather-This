@@ -1,33 +1,36 @@
+import dotenv from 'dotenv';
+
 //! TODO:
-//?? Require in dotenv.config()
 //?? Rewrite GeoLocateAPI
-const weatherApiKey = import.meta.env.WEATHER_API;
+// import dotenv from 'dotenv';
+// dotenv.config();
+const weatherApiKey = import.meta.env.VITE_WEATHER_API;
+// const weatherApiKey = process.env.VITE_WEATHER_API;
 
-function geoLocateAPI(weatherData) {
-  const geoAPI = `https://api.openweathermap.org/geo/1.0/direct?q=${weatherData}&appid=${weatherApiKey}`;
-  fetch(geoAPI)
-    .then(function (response) {
-      if (response.status !== 200) {
-        $cityName.text(response.status + "It's gotten messy here");
-      } else {
-        return response.json();
-      }
-    })
-    .then(function (data) {
-      if (data[0] !== '' && data.length > 0) {
-        let currentData = data[0];
-        long = data[0].lon;
-        lat = data[0].lat;
-        fiveDayForcast(long, lat);
-        // renderCityNameDate(currentData); //! Change
-      } else {
-        $cityName.text("Yikes, that's not a valid city!"); //! Change
-        return;
-      }
-    });
-}
+export const geoLocateAPI = async (city) => {
+  const geoAPI = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${weatherApiKey}`;
+  fetch(geoAPI);
+  try {
+    const response = await fetch(geoAPI);
+    if (response.status !== 200) {
+      return `${response.status} -- It's gotten messy here`;
+    }
+    const data = await response.json();
 
-async function fiveDayForcast(lat, long) {
+    if (data[0] !== '' && data.length > 0) {
+      // let currentData = data[0];
+      const long = data[0].lon;
+      const lat = data[0].lat;
+      const coords = { lat, long };
+      console.log(coords);
+      return coords;
+      // return fiveDayForecast(long, lat);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+export async function fiveDayForecast(lat, long) {
   //   api kept switching up lat and longs, so the variables have been switched
   const openWeatherAPIKeyUrl = `https://api.openweathermap.org/data/2.5/forecast/?lat=${long}&long=${lat}&appid=${weatherApiKey}&units=imperial`;
 
@@ -35,6 +38,7 @@ async function fiveDayForcast(lat, long) {
 
   await data.json();
 
+  return data.json();
   // await function (data) {
   //     let weatherDataArray = data.list;
   //     renderFiveDayLoop(weatherDataArray);
