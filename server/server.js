@@ -9,7 +9,6 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
