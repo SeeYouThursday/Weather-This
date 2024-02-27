@@ -7,4 +7,4 @@ query me {
     savedCities
 }`;
 
-export const QUERY_CITIES = ``;
+// export const QUERY_CITIES = ``;
