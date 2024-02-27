@@ -1,4 +1,3 @@
-import path from 'path';
 import db from './config/connection.js';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServer } from '@apollo/server';
@@ -12,7 +11,7 @@ const __dirname = dirname(__filename);
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 // import { typeDefs, resolvers } from './schema/index.js';
 import typeDefs from './schema/typeDefs.js';
 import resolvers from './schema/resolvers.js';
