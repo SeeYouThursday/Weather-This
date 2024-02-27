@@ -16,6 +16,7 @@ const PORT = 3001;
 // import { typeDefs, resolvers } from './schema/index.js';
 import typeDefs from './schema/typeDefs.js';
 import resolvers from './schema/resolvers.js';
+import path from 'path';
 
 //instaniate express
 const app = express();
