@@ -8,6 +8,7 @@ import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
+import Results from './pages/Results.jsx';
 // Style Imports
 import './assets/css/index.css';
 
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/results" element={<Results />} />
           {/* <Route path="/logout" component={Logout} /> //! Will work on redirect to landing on logout*/}
         </Route>
         <Route path="*" element={<ErrorPage />} />

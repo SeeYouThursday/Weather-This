@@ -35,9 +35,9 @@ export default function LandingPage() {
 
   return (
     <div className="shadow-xl shadow-blue-gray-900/50">
-      <Typography color="blue" gradient>
+      {/* <Typography color="blue" gradient="true">
         We look outside so you don&apos;t have to!
-      </Typography>
+      </Typography> */}
       <div style={style}>
         <Search />
       </div>
