@@ -10,11 +10,11 @@ import {
 } from '@material-tailwind/react';
 import LoginBtn from '../components/LoginBtn';
 const Login = () => {
-  const auth0Domain = import.meta.env.VITE_DOMAIN; // replace with your Auth0 domain
-  const clientId = import.meta.env.VITE_CLIENT_ID; // replace with your Auth0 client ID
-  const redirectUri = window.location.origin; // replace with your redirect URI
+  // const auth0Domain = import.meta.env.VITE_DOMAIN; // replace with your Auth0 domain
+  // const clientId = import.meta.env.VITE_CLIENT_ID; // replace with your Auth0 client ID
+  // const redirectUri = window.location.origin; // replace with your redirect URI
 
-  const url = `https://${auth0Domain}/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=openid%20profile%20email`;
+  // const url = `https://${auth0Domain}/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=openid%20profile%20email`;
   return (
     <div
       style={{

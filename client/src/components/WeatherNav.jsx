@@ -4,10 +4,10 @@ import { Navbar, Typography, Avatar, Collapse } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/images/WeatherThisLogo.png';
 import Search from './Search';
+import LoginBtn from './LoginBtn';
 
 //?? Nav Btns
 const navBtns = [
-  { name: 'Login', route: '/login' },
   { name: 'Sign Up', route: '/signup' },
   { name: 'Dashboard', route: '/dashboard' },
 ];
@@ -65,6 +65,7 @@ export default function WeatherNav() {
               // padding: 5,
             }}
           >
+            <LoginBtn />
             {genNavBtns}
           </div>
         </div>{' '}

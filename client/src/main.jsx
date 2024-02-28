@@ -2,12 +2,7 @@ import dotenv from 'dotenv';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // Component Imports
 import App from './App.jsx'; // Uncommented the import statement for the App component
 import LandingPage from './pages/LandingPage.jsx';
@@ -38,7 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />}>
           <Route index element={<LandingPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           {/* <Route path="/authorize" redirectUri={<Redirect />} /> */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/results" element={<Results />} />
