@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // Component Imports
 import App from './App.jsx'; // Uncommented the import statement for the App component
 import LandingPage from './pages/LandingPage.jsx';
-import Login from './pages/Login.jsx';
+// import Login from './pages/Login.jsx'; //deprecated with Auth0 integration
 import Signup from './pages/Signup.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
