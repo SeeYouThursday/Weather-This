@@ -12,6 +12,7 @@ import {
 } from '@material-tailwind/react';
 import Search from '../components/Search';
 import Logo from '../assets/images/WeatherThisLogo.png';
+import WeatherCard from '../components/WeatherCard';
 
 // Logo middle
 // Search bar middle
@@ -38,8 +39,10 @@ export default function LandingPage() {
       {/* <Typography color="blue" gradient="true">
         We look outside so you don&apos;t have to!
       </Typography> */}
-      <div style={style}>
+      {/* <div style={style}> */}
+      <div>
         <Search />
+        {/* <WeatherCard /> */}
       </div>
     </div>
   );

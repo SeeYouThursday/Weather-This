@@ -8,7 +8,7 @@ import {
   Input,
   Checkbox,
 } from '@material-tailwind/react';
-
+import LoginBtn from '../components/LoginBtn';
 const Login = () => {
   return (
     <div
@@ -37,9 +37,7 @@ const Login = () => {
           </div>
         </CardBody>
         <CardFooter className="pt-0">
-          <Button variant="gradient" fullWidth>
-            Sign In
-          </Button>
+          <LoginBtn />
           <Typography variant="small" className="mt-6 flex justify-center">
             Don&apos;t have an account?
             <Typography

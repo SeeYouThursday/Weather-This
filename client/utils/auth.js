@@ -1,3 +1,5 @@
+import auth0 from 'auth0-js';
+
 function login(email, password, callback) {
   const bcrypt = require('bcrypt');
   const MongoClient = require('mongodb@3.1.4').MongoClient;

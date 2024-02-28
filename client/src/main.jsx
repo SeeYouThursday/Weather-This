@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
@@ -15,7 +16,13 @@ import './assets/css/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Auth0Provider>
+    <Auth0Provider
+      domain={import.meta.env.VITE_DOMAIN}
+      clientId={import.meta.env.VITE_CLIENT_ID}
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+      }}
+    >
       <Router>
         <Routes>
           <Route path="/" element={<App />}>
