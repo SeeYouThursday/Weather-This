@@ -22,4 +22,7 @@ mutation login($email: String!, $password: String!) {
         }
     }`;
 
+export const addCity = gql``;
+
+export const removeCity = gql``;
 //Future Dev: Remove Cities
