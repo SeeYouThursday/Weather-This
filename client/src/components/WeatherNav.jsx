@@ -70,7 +70,7 @@ export default function WeatherNav() {
         </div>
         {/* </div>{' '} */}
       </Navbar>{' '}
-      <Search nav={true} />
+      {/* <Search landing={false} /> */}
     </>
   );
 }

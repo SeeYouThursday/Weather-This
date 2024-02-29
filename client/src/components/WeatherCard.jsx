@@ -10,14 +10,13 @@ import {
 export default function WeatherCard({ date, temp, wind, humidity }) {
   return (
     <>
-      <Card className="mt-6 w-200 h-30">
-        <CardHeader>
+      <Card className="">
+        {/* issues with offset styling <CardHeader></CardHeader> */}
+        <CardBody>
+          {' '}
           <Typography variant="h4" color="blue-gray" className="mb-2">
-            Weather Forecast:
             {date}
           </Typography>
-        </CardHeader>
-        <CardBody>
           <Typography variant="h5" color="blue-gray" className="mb-2">
             {temp}
             {wind}
