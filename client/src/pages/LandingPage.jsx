@@ -42,9 +42,17 @@ export default function LandingPage() {
         let time = element.dt_txt.split(' ')[1];
         return date !== todaysDate && time === '15:00:00';
       });
-
+      // For testing purposes
+      // for (const weathery of filteredWeatherData) {
+      //   console.log(JSON.stringify(filteredWeatherData));
+      // }
       return filteredWeatherData.map((date) => (
-        <WeatherCard key={date.dt} date={date.dt_txt} temp={date.main.temp} />
+        <WeatherCard
+          key={date.dt}
+          date={date.dt_txt}
+          temp={date.main.temp}
+          humidity={date.main.humidity}
+        />
       ));
     } catch (err) {
       console.log(err);
@@ -56,42 +64,49 @@ export default function LandingPage() {
     setSearchResults(results);
   };
 
-  const style = {
-    backgroundImage: `url(${Logo})`,
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundColor: 'white',
-    minHeight: '300px',
-    minWidth: '300px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    borderRadius: 5,
-    margin: 'auto 0',
-  };
+  // const style = {
+  //   // backgroundImage: `url(${Logo})`,
+  //   // backgroundSize: 'contain',
+  //   // backgroundRepeat: 'no-repeat',
+  //   // backgroundPosition: 'center',
+  //   // backgroundColor: 'white',
+  //   // minHeight: '300px',
+  //   // minWidth: '300px',
+  //   // display: 'flex',
+  //   // flexDirection: 'column',
+  //   // justifyContent: 'flex-end',
+  //   // alignItems: 'center',
+  //   borderRadius: 5,
+  //   margin: 'auto 0',
+  // };
 
   return (
     <div className="flex flex-col">
       {searchResults.length ? (
-        <Search
-          landing={false}
-          onResults={handleResults}
-          weatherCards={weatherCards}
-          onChange={handleCityInput}
-        />
+        <>
+          <Search
+            landing={false}
+            onResults={handleResults}
+            weatherCards={weatherCards}
+            onChange={handleCityInput}
+          />
+          <Typography variant="h2" className="text-center">
+            5 DAY FORECAST
+          </Typography>
+          <Typography className="text-center">
+            (replace with img from Canva)
+          </Typography>
+        </>
       ) : null}
 
       <div className="shadow-xl shadow-blue-gray-900/50">
-        {/* <Typography color="blue" gradient="true">
-        We look outside so you don&apos;t have to!
-      </Typography> */}
         {/* <div style={style}> */}
         <div
-          className="flex items-center justify-between rounded-xl border border-white bg-white/75 py-4 px-6 backdrop-blur-lg shadow-lg shadow-black/5 saturate-200"
-          style={style}
+          // className="flex flex-col items-center justify-between rounded-xl border border-white bg-white/75 py-4 px-6 backdrop-blur-lg shadow-lg shadow-black/5 saturate-200"
+          // style={style}
+          className=""
         >
+          {/* <img src={Logo} className="object-contain md:object-scale-down"></img> */}
           <Search
             landing={true}
             onResults={handleResults}
@@ -99,7 +114,9 @@ export default function LandingPage() {
             onChange={handleCityInput}
           />
         </div>
-        <div className="flex container">{searchResults}</div>
+        <div className="flex flex-wrap grid sm:grid-cols-5 gap-2 m-2">
+          {searchResults}
+        </div>
       </div>
     </div>
   );

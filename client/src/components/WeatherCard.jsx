@@ -6,21 +6,39 @@ import {
   Button,
   CardHeader,
 } from '@material-tailwind/react';
-
+import dayjs from 'dayjs';
 export default function WeatherCard({ date, temp, wind, humidity }) {
   return (
     <>
-      <Card className="">
+      <Card className="transition-transform duration-500 ease-in-out transform hover:scale-105 grid  items-end justify-center text-center bg-[url('/5day_card.png')] bg-cover bg-center rounded-large">
         {/* issues with offset styling <CardHeader></CardHeader> */}
+
         <CardBody>
           {' '}
-          <Typography variant="h4" color="blue-gray" className="mb-2">
-            {date}
+          <CardHeader
+            shadow={false}
+            color="transparent"
+            // className="m-0"
+          >
+            <Typography variant="h5" color="" className="mb-2">
+              <p
+                style={{
+                  fontFamily: 'poppins',
+                  color: 'black',
+                  fontStyle: 'italic',
+                }}
+              >
+                {dayjs(date).format('dddd')}
+              </p>{' '}
+              {dayjs(date).format('M/D/YYYY')}
+            </Typography>
+          </CardHeader>
+          <Typography variant="lead" color="blue-gray" className="mb-2">
+            {Math.ceil(temp)}&#8457;
           </Typography>
-          <Typography variant="h5" color="blue-gray" className="mb-2">
-            {temp}
-            {wind}
-            {humidity}
+          <Typography variant="h6" color="blue-gray" className="mb-2">
+            Wind: {wind}
+            Humidity: {humidity}
           </Typography>
         </CardBody>
         {/* <CardFooter className="pt-0">

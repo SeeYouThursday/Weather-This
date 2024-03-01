@@ -1,5 +1,6 @@
 import { Input } from '@material-tailwind/react';
 import { useState } from 'react';
+import Logo from '../assets/images/WeatherThisLogo.png';
 
 //! imports moved to parent
 // import { geoLocateAPI, fiveDayForecast } from '../../utils/weather-fetch';
@@ -27,7 +28,12 @@ export default function Search({ landing, onResults, weatherCards, onChange }) {
     <>
       {' '}
       {isFormVisible && (
-        <div className="flex justify-center">
+        <div className="flex flex-col justify-center">
+          {/* <img
+            src={Logo}
+            className="object-contain md:object-scale-down"
+            style={{ maxHeight: '60vh' }}
+          ></img> //! Revisit for image conditional rendering*/}
           <div className="flex justify-center">
             <form
               method="post"
