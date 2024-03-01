@@ -9,7 +9,8 @@ import cors from 'cors';
 
 import typeDefs from './schema/typeDefs.js';
 import resolvers from './schema/resolvers.js';
-
+import jwt from 'jsonwebtoken';
+import jwksClient from 'jwks-rsa';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -46,13 +47,9 @@ app.use(
 
 console.log(`🚀 Server ready at http://localhost:3001/graphql`);
 
-const jwt = require('jsonwebtoken');
-const jwksClient = require('jwks-rsa');
-
-const client = jwksClient({
-  jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
-});
-
+// const client = jwksClient({
+//   jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
+// });
 
 // To configure Apollo Server to authenticate requests using Auth0, you'll need to verify the JWT (JSON Web Token) that Auth0 provides when a user logs in. Here's a step-by-step guide:
 

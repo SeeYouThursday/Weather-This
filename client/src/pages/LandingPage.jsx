@@ -90,10 +90,10 @@ export default function LandingPage() {
             weatherCards={weatherCards}
             onChange={handleCityInput}
           />
-          <Typography variant="h2" className="text-center">
+          <Typography variant="h2" color="white" className="text-center">
             5 DAY FORECAST
           </Typography>
-          <Typography className="text-center">
+          <Typography color="white" className="text-center">
             (replace with img from Canva)
           </Typography>
         </>
