@@ -7,10 +7,23 @@ import {
   CardHeader,
 } from '@material-tailwind/react';
 import dayjs from 'dayjs';
+import five_day from '../assets/images/5dayAsset.avif';
+
 export default function WeatherCard({ date, temp, wind, humidity }) {
   return (
     <>
-      <Card className="transition-transform duration-500 ease-in-out transform hover:scale-105 grid  items-end justify-center text-center bg-[url('/5day_card.png')] bg-cover bg-center rounded-large">
+      <Card
+        className="transition-transform duration-500 ease-in-out transform hover:scale-105 grid  items-end justify-center text-center bg-cover bg-center rounded-large"
+        style={{
+          backgroundImage: `url(${five_day})`,
+          backgroundBlendMode: 'multiply',
+        }}
+        //Fallback for card background
+        onError={(e) => {
+          e.target.style.backgroundImage =
+            'linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5))';
+        }}
+      >
         {/* issues with offset styling <CardHeader></CardHeader> */}
 
         <CardBody>
@@ -41,28 +54,6 @@ export default function WeatherCard({ date, temp, wind, humidity }) {
             Humidity: {humidity}
           </Typography>
         </CardBody>
-        {/* <CardFooter className="pt-0">
-      <a href="#" className="inline-block">
-        <Button size="sm" variant="text" className="flex items-center gap-2">
-          Learn More
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="h-4 w-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-            />
-          </svg>
-        </Button>
-      </a>
-      <Typography>Placeholder</Typography>
-    </CardFooter> */}
       </Card>
     </>
   );

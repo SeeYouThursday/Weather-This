@@ -4,13 +4,10 @@ import ReactDOM from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // Component Imports
-import App from './App.jsx'; // Uncommented the import statement for the App component
+import App from './App.jsx';
 import LandingPage from './pages/LandingPage.jsx';
-// import Login from './pages/Login.jsx'; //deprecated with Auth0 integration
-import Signup from './pages/Signup.jsx';
-import Dashboard from './pages/Dashboard.jsx';
+
 import ErrorPage from './pages/ErrorPage.jsx';
-import Results from './pages/Results.jsx';
 // Style Imports
 import './assets/css/index.css';
 import { StrictMode } from 'react';
@@ -33,12 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Router>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route index element={<LandingPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/login" element={<Login />} /> */}
-            {/* <Route path="/authorize" redirectUri={<Redirect />} /> */}
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/results" element={<Results />} />
+            <Route index element={<LandingPage />} />s
             {/* <Route path="/logout" component={Logout} /> //! Will work on redirect to landing on logout*/}
           </Route>
           <Route path="*" element={<ErrorPage />} />

@@ -37,10 +37,7 @@ const client = new ApolloClient({
 
 const style = {
   background: {
-    backgroundImage: `url(${nightCity})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+    backgroundColor: '#003362',
     height: '90vh',
     zIndex: -1,
     display: 'flex',

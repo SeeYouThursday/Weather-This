@@ -9,14 +9,13 @@ import Logo from '../assets/images/WeatherThisLogo.png';
 
 export default function Search({ landing, onResults, weatherCards, onChange }) {
   // const [city, setCity] = useState('');
-  const [weatherCardsData, setWeatherCardsData] = useState([]);
+  // const [weatherCardsData, setWeatherCardsData] = useState([]);
   const [isFormVisible, setFormVisible] = useState(true);
 
   //Handles submit and setting state for rendering cards
   const handleSubmit = async (e) => {
     e.preventDefault();
     const cards = await weatherCards();
-    setWeatherCardsData(cards);
     onResults(cards);
     if (landing) {
       setFormVisible(false);
@@ -29,16 +28,11 @@ export default function Search({ landing, onResults, weatherCards, onChange }) {
       {' '}
       {isFormVisible && (
         <div className="flex flex-col justify-center">
-          {/* <img
-            src={Logo}
-            className="object-contain md:object-scale-down"
-            style={{ maxHeight: '60vh' }}
-          ></img> //! Revisit for image conditional rendering*/}
           <div className="flex justify-center">
             <form
               method="post"
               style={{
-                backgroundColor: '',
+                backgroundColor: 'white',
                 borderRadius: 3,
                 padding: '5px 5px 0px 3px',
                 margin: 2,
@@ -50,7 +44,7 @@ export default function Search({ landing, onResults, weatherCards, onChange }) {
                 variant="standard"
                 color="blue"
                 label="Search"
-                placeholder="Search"
+                placeholder="Enter City, State, or Zip"
                 icon={<i className="fas fa-heart" />}
                 onChange={onChange}
               />

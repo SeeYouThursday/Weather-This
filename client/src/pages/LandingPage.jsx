@@ -42,10 +42,7 @@ export default function LandingPage() {
         let time = element.dt_txt.split(' ')[1];
         return date !== todaysDate && time === '15:00:00';
       });
-      // For testing purposes
-      // for (const weathery of filteredWeatherData) {
-      //   console.log(JSON.stringify(filteredWeatherData));
-      // }
+
       return filteredWeatherData.map((date) => (
         <WeatherCard
           key={date.dt}
@@ -63,22 +60,6 @@ export default function LandingPage() {
   const handleResults = (results) => {
     setSearchResults(results);
   };
-
-  // const style = {
-  //   // backgroundImage: `url(${Logo})`,
-  //   // backgroundSize: 'contain',
-  //   // backgroundRepeat: 'no-repeat',
-  //   // backgroundPosition: 'center',
-  //   // backgroundColor: 'white',
-  //   // minHeight: '300px',
-  //   // minWidth: '300px',
-  //   // display: 'flex',
-  //   // flexDirection: 'column',
-  //   // justifyContent: 'flex-end',
-  //   // alignItems: 'center',
-  //   borderRadius: 5,
-  //   margin: 'auto 0',
-  // };
 
   return (
     <div className="flex flex-col">
