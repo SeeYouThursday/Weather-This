@@ -1,19 +1,9 @@
-import React from 'react'; // Import the missing React package
 import { useState } from 'react';
 import { geoLocateAPI, fiveDayForecast } from '../../utils/weather-fetch';
 import dayjs from 'dayjs';
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-  Input,
-  Checkbox,
-} from '@material-tailwind/react';
+import { Typography } from '@material-tailwind/react';
 import Search from '../components/Search';
-import Logo from '../assets/images/WeatherThisLogo.png';
+// import Logo from '../assets/images/WeatherThisLogo.png';
 import WeatherCard from '../components/WeatherCard';
 
 // Logo middle

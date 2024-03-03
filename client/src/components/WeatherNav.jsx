@@ -1,9 +1,7 @@
 import { Navbar, Typography, Avatar } from '@material-tailwind/react';
 import LoginBtn from './LoginBtn';
-import smallLogo from '../../public/smallLogo.avif';
 import webPLogo from '../../public/WeatherThisLogoWP.webp';
 // import LogoPng from '../assets/images/WeatherThisLogoPNG.png';
-import qualLogo from '../../public/QualLogo.avif';
 //?? Actual Export of Component
 export default function WeatherNav() {
   return (
