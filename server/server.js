@@ -21,6 +21,7 @@ const httpServer = http.createServer(app);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  cache: new InMemoryCache(),
 });
 
 await server.start().then(() => {
@@ -44,8 +45,6 @@ app.use(
     context: async ({ req }) => ({ token: req.headers.token }),
   })
 );
-
-console.log(`🚀 Server ready at http://localhost:3001/graphql`);
 
 // const client = jwksClient({
 //   jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
