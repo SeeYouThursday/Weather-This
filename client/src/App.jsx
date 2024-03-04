@@ -1,5 +1,6 @@
 // Import Necessary Files
 // Remove the unused import statement for 'React'
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
@@ -49,7 +50,7 @@ const style = {
 
 function App() {
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <ApolloProvider client={client}>
         {' '}
         <WeatherNav />
@@ -57,7 +58,7 @@ function App() {
           <Outlet />
         </div>
       </ApolloProvider>
-    </>
+    </Suspense>
   );
 }
 

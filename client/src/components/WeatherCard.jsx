@@ -1,9 +1,7 @@
 import {
   Card,
   CardBody,
-  CardFooter,
   Typography,
-  Button,
   CardHeader,
 } from '@material-tailwind/react';
 import dayjs from 'dayjs';
@@ -33,7 +31,7 @@ export default function WeatherCard({ date, temp, wind, humidity }) {
             color="transparent"
             // className="m-0"
           >
-            <Typography variant="h5" color="" className="mb-2">
+            <Typography variant="h5" color="black" className="mb-2">
               <p
                 style={{
                   fontFamily: 'poppins',
