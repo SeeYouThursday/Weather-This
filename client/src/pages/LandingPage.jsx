@@ -84,26 +84,26 @@ export default function LandingPage() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="flex flex-col">
+      <div
+        style={{ height: '70vh' }}
+        className="flex flex-col align-center justify-center"
+      >
         {searchResults.length ? (
           <>
+            <picture>
+              <source></source>
+              <img src="/FiveDayLabel.png" alt="Five Day Forecast" />
+            </picture>
             <Search
               landing={false}
               onResults={handleResults}
               weatherCards={weatherCards}
               onChange={handleCityInput}
             />
-            <Typography variant="h2" color="white" className="text-center">
-              5 DAY FORECAST
-            </Typography>
-            <Typography color="white" className="text-center">
-              (replace with img from Canva)
-            </Typography>
           </>
         ) : null}
 
         <div className="shadow-xl shadow-blue-gray-900/50">
-          {/* <div style={style}> */}
           <div>
             <Search
               landing={true}

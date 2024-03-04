@@ -21,7 +21,6 @@ const httpServer = http.createServer(app);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  cache: new InMemoryCache(),
 });
 
 await server.start().then(() => {

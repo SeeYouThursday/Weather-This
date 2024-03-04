@@ -11,7 +11,6 @@ import {
 import { setContext } from '@apollo/client/link/context';
 // import { ComplexNavbar } from './components/Nav.jsx';
 import WeatherNav from './components/WeatherNav.jsx';
-import nightCity from './assets/images/backgrounds/night_city.svg';
 
 // Making GraphQL Link
 const httpLink = createHttpLink({

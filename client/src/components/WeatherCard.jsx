@@ -14,7 +14,7 @@ export default function WeatherCard({ date, temp, wind, humidity }) {
         className="transition-transform duration-500 ease-in-out transform hover:scale-105 grid  items-end justify-center text-center bg-cover bg-center rounded-large"
         style={{
           backgroundImage: `url(${five_day})`,
-          backgroundBlendMode: 'multiply',
+          // backgroundBlendMode: 'multiply',
         }}
         //Fallback for card background
         onError={(e) => {
@@ -26,11 +26,7 @@ export default function WeatherCard({ date, temp, wind, humidity }) {
 
         <CardBody>
           {' '}
-          <CardHeader
-            shadow={false}
-            color="transparent"
-            // className="m-0"
-          >
+          <CardHeader shadow={false} color="transparent">
             <Typography variant="h5" color="black" className="mb-2">
               <p
                 style={{
