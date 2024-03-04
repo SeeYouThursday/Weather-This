@@ -52,7 +52,6 @@ export default function Search({ landing, onResults, weatherCards, onChange }) {
           </div>
         </div>
       )}{' '}
-      <br></br>
     </>
   );
 }

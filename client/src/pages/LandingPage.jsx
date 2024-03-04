@@ -84,26 +84,26 @@ export default function LandingPage() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div
-        style={{ height: '70vh' }}
-        className="flex flex-col align-center justify-center"
-      >
+      <div style={{ height: '100vh' }} className="flex flex-col justify-center">
         {searchResults.length ? (
-          <>
-            <picture>
-              <source></source>
-              <img src="/FiveDayLabel.png" alt="Five Day Forecast" />
-            </picture>
+          <div className="flex flex-col justify-center align-center">
             <Search
               landing={false}
               onResults={handleResults}
               weatherCards={weatherCards}
               onChange={handleCityInput}
             />
-          </>
+            <img
+              src="/FiveDayLabel.png"
+              alt="Five Day Forecast"
+              height="50%"
+              width="50%"
+              className="mx-auto"
+            />
+          </div>
         ) : null}
 
-        <div className="shadow-xl shadow-blue-gray-900/50">
+        <div>
           <div>
             <Search
               landing={true}
@@ -112,7 +112,7 @@ export default function LandingPage() {
               onChange={handleCityInput}
             />
           </div>
-          <div className="flex flex-wrap grid sm:grid-cols-5 gap-2 m-2">
+          <div className="flex flex-wrap grid sm:grid-cols-5 gap-2 m-2 justify-center">
             {searchResults}
           </div>
         </div>
