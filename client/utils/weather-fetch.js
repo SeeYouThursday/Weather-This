@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-
 //! TODO:
 //?? Rewrite GeoLocateAPI
 // import dotenv from 'dotenv';
