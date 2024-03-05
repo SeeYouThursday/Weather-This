@@ -11,7 +11,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 // import { ComplexNavbar } from './components/Nav.jsx';
 import WeatherNav from './components/WeatherNav.jsx';
-
+import Footer from './components/Footer.jsx';
 // Making GraphQL Link
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -41,7 +41,7 @@ const style = {
     height: '90vh',
     zIndex: -1,
     display: 'flex',
-    // flexDirection: 'column',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -55,6 +55,7 @@ function App() {
         <WeatherNav />
         <div style={style.background}>
           <Outlet />
+          <Footer />
         </div>
       </ApolloProvider>
     </Suspense>

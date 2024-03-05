@@ -69,7 +69,10 @@ export default function LandingPage() {
           key={date.dt}
           date={date.dt_txt}
           temp={date.main.temp}
+          wind={date.wind.speed}
           humidity={date.main.humidity}
+          icon={date.weather[0].icon}
+          description={date.weather[0].description}
         />
       ));
     } catch (err) {
@@ -94,7 +97,7 @@ export default function LandingPage() {
               onChange={handleCityInput}
             />
             <img
-              src="/FiveDayLabel.png"
+              src="/FiveDayLabel.gif"
               alt="Five Day Forecast"
               height="50%"
               width="50%"
