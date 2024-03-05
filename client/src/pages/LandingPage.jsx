@@ -1,60 +1,59 @@
 import { useState, useEffect, Suspense } from 'react';
 import { geoLocateAPI, fiveDayForecast } from '../../utils/weather-fetch';
 import dayjs from 'dayjs';
-import { Typography } from '@material-tailwind/react';
-import Search from '../components/Search';
-// import Logo from '../assets/images/WeatherThisLogo.png';
+import { Input } from '@material-tailwind/react';
 import WeatherCard from '../components/WeatherCard';
 
-// Logo middle
-// Search bar middle
-// Option to sign up
+function Search({ landing, onResults, weatherCards, onChange }) {
+  const [isFormVisible, setFormVisible] = useState(true);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const cards = await weatherCards();
+    onResults(cards);
+    if (landing) {
+      setFormVisible(false);
+    }
+  };
+
+  return (
+    isFormVisible && (
+      <div className="flex flex-col justify-center">
+        <div className="flex justify-center">
+          <form
+            method="post"
+            style={{
+              backgroundColor: 'white',
+              borderRadius: 3,
+              padding: '5px 5px 0px 3px',
+              margin: 2,
+              display: 'flex',
+            }}
+            onSubmit={handleSubmit}
+          >
+            <Input
+              variant="standard"
+              color="blue"
+              label="Search"
+              placeholder="Enter City, State, or Zip"
+              icon={<i className="fas fa-heart" />}
+              onChange={onChange}
+            />
+          </form>
+        </div>
+      </div>
+    )
+  );
+}
+
 export default function LandingPage() {
-  // const [weather, setWeather] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [city, setCity] = useState('');
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const coords = await geoLocateAPI(city);
-        const { lat, long } = coords;
-        const weatherData = await fiveDayForecast(lat, long);
-        const weatherList = weatherData.list;
-
-        const todaysDate = dayjs().format('(M/D/YYYY)');
-        const filteredWeatherData = weatherList.filter((element) => {
-          let date = element.dt_txt.split(' ')[0];
-          let time = element.dt_txt.split(' ')[1];
-          return date !== todaysDate && time === '15:00:00';
-        });
-
-        return filteredWeatherData.map((date) => (
-          <WeatherCard
-            key={date.dt}
-            date={date.dt_txt}
-            temp={date.main.temp}
-            humidity={date.main.humidity}
-          />
-        ));
-      } catch (err) {
-        console.log(err);
-        //!Render form error later
-      }
-    }
-    fetchData();
-  }, [city]);
-
-  const handleCityInput = (e) => {
-    const newCity = e.target.value.trim();
-    setCity(newCity);
-  };
-
-  const weatherCards = async () => {
+  const fetchWeatherData = async (city) => {
     try {
       const coords = await geoLocateAPI(city);
-      const { lat, long } = coords;
-      const weatherData = await fiveDayForecast(lat, long);
+      const weatherData = await fiveDayForecast(coords.lat, coords.long);
       const weatherList = weatherData.list;
 
       const todaysDate = dayjs().format('(M/D/YYYY)');
@@ -77,47 +76,25 @@ export default function LandingPage() {
       ));
     } catch (err) {
       console.log(err);
-      //!Render form error later
     }
   };
 
-  const handleResults = (results) => {
-    setSearchResults(results);
+  const handleCityInput = (e) => {
+    const newCity = e.target.value.trim();
+    setCity(newCity);
   };
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div style={{ height: '100vh' }} className="flex flex-col justify-center">
-        {searchResults.length ? (
-          <div className="flex flex-col justify-center align-center">
-            <Search
-              landing={false}
-              onResults={handleResults}
-              weatherCards={weatherCards}
-              onChange={handleCityInput}
-            />
-            <img
-              src="/FiveDayLabel.gif"
-              alt="Five Day Forecast"
-              height="50%"
-              width="50%"
-              className="mx-auto"
-            />
-          </div>
-        ) : null}
-
-        <div>
-          <div>
-            <Search
-              landing={true}
-              onResults={handleResults}
-              weatherCards={weatherCards}
-              onChange={handleCityInput}
-            />
-          </div>
-          <div className="flex flex-wrap grid sm:grid-cols-5 gap-2 m-2 justify-center">
-            {searchResults}
-          </div>
+        <Search
+          landing={!searchResults.length}
+          onResults={setSearchResults}
+          weatherCards={() => fetchWeatherData(city)}
+          onChange={handleCityInput}
+        />
+        <div className="flex flex-wrap grid sm:grid-cols-5 gap-2 m-2 justify-center">
+          {searchResults}
         </div>
       </div>
     </Suspense>

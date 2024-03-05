@@ -6,6 +6,16 @@ import {
 } from '@material-tailwind/react';
 import dayjs from 'dayjs';
 import five_day from '../assets/images/5dayAsset.avif';
+import PropTypes from 'prop-types';
+
+WeatherCard.propTypes = {
+  date: PropTypes.string,
+  temp: PropTypes.number,
+  wind: PropTypes.number,
+  humidity: PropTypes.number,
+  icon: PropTypes.string,
+  description: PropTypes.string,
+};
 
 export default function WeatherCard({
   date,

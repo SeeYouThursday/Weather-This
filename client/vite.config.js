@@ -19,6 +19,7 @@ export default defineConfig({
     outDir: 'dist',
     minify: true,
     sourcemap: false,
+    manifest: 'manifest.json',
     rollupOptions: {
       output: {
         manualChunks: {

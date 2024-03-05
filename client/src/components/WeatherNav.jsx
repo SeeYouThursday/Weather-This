@@ -7,21 +7,34 @@ export default function WeatherNav() {
   return (
     <div>
       <Navbar
-        className="flex justify-evenly items-center hover:bg-gradient-to-l bg-gradient-to-r from-cyan-500 to-blue-500 px-4 py-2 lg:px-8 lg:py-4 rounded-none border-none"
+        className="flex justify-between items-center bg-gradient-to-r from-cyan-500 rounded-none"
         style={{
           boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
           minWidth: '99vw',
         }}
       >
-        <Avatar
-          type="image/webp"
-          srcSet="/WeatherThisLogoWP.webp"
-          variant="rounded"
-          alt="Weather This App Logo"
-        />
-        <div className="flex flex-col text-center">
-          <Typography variant="h3">WEATHER THIS</Typography>
-          <p> We look outside so you don&apos;t have to!</p>
+        <div className="flex flex-col text-center items-center justify-center">
+          <div className="flex items-end">
+            <Avatar
+              type="image/webp"
+              srcSet="/WeatherThisLogoWP.webp"
+              // variant=""
+              alt="Weather This App Logo"
+              className="p-2"
+            />
+            <Typography
+              variant="h3"
+              color="gray"
+              gradient="true"
+              className="mb-0.5"
+            >
+              WEATHER THIS
+            </Typography>{' '}
+          </div>
+          <p className="text-white-500">
+            {' '}
+            We look outside so you don&apos;t have to!
+          </p>
         </div>
         <div className="flex">
           <LoginBtn />
