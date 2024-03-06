@@ -111,7 +111,7 @@ export default function LandingPage() {
         <div className="flex flex-col justify-center items-center bg-white bg-opacity-50 backdrop-filter backdrop-blur-md aspect-w-1 aspect-h-1 py-5 px-4 mt-20">
           <div className="flex flex-row justify-center items-center">
             <img
-              src="LGFiveDayLabel.gif"
+              src="LGFiveDayLabelMinified.gif"
               height={'150px'}
               width={'200px'}
               className="rounded-lg"
@@ -132,7 +132,7 @@ export default function LandingPage() {
         ) : null}
         {windowWidth <= 768 ? (
           <div className="flex w-80 justify-center items-center m-auto my-5 flex w-80 justify-center">
-            <Carousel loop="true" className="overflow-auto scrollbar-hide">
+            <Carousel loop={true} className="overflow-auto scrollbar-hide">
               {searchResults.map((result, index) => (
                 <div key={index}>{result}</div>
               ))}

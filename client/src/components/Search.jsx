@@ -1,6 +1,5 @@
 import { Input } from '@material-tailwind/react';
 import { useState } from 'react';
-import Logo from '../assets/images/WeatherThisLogo.png';
 
 //! imports moved to parent
 // import { geoLocateAPI, fiveDayForecast } from '../../utils/weather-fetch';
