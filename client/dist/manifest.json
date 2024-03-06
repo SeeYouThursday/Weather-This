@@ -1,0 +1,30 @@
+{
+  "_react-Dl6G-zuu.js": {
+    "file": "assets/react-Dl6G-zuu.js"
+  },
+  "_reactDom-D1V3Ogpg.js": {
+    "file": "assets/reactDom-D1V3Ogpg.js",
+    "imports": [
+      "_react-Dl6G-zuu.js"
+    ]
+  },
+  "index.html": {
+    "file": "assets/index-B4fRJvRO.js",
+    "src": "index.html",
+    "isEntry": true,
+    "imports": [
+      "_react-Dl6G-zuu.js",
+      "_reactDom-D1V3Ogpg.js"
+    ],
+    "css": [
+      "assets/index-uXu5mU32.css"
+    ],
+    "assets": [
+      "assets/5dayAsset-LWgfK1ja.avif"
+    ]
+  },
+  "src/assets/images/5dayAsset.avif": {
+    "file": "assets/5dayAsset-LWgfK1ja.avif",
+    "src": "src/assets/images/5dayAsset.avif"
+  }
+}

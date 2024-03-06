@@ -1,9 +1,21 @@
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { geoLocateAPI, fiveDayForecast } from '../../utils/weather-fetch';
 import dayjs from 'dayjs';
-import { Input } from '@material-tailwind/react';
+import { Input, Carousel, Typography } from '@material-tailwind/react';
 import WeatherCard from '../components/WeatherCard';
 import PropTypes from 'prop-types';
+
+function useWindowWidth() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowWidth;
+}
 
 function Search({ onResults, weatherCards, onChange }) {
   // const [isFormVisible, setFormVisible] = useState(true);
@@ -18,7 +30,6 @@ function Search({ onResults, weatherCards, onChange }) {
   };
 
   Search.propTypes = {
-    landing: PropTypes.bool.isRequired,
     onResults: PropTypes.func.isRequired,
     weatherCards: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -55,6 +66,7 @@ function Search({ onResults, weatherCards, onChange }) {
 export default function LandingPage() {
   const [searchResults, setSearchResults] = useState([]);
   const [city, setCity] = useState('');
+  const windowWidth = useWindowWidth();
 
   const fetchWeatherData = async (city) => {
     try {
@@ -94,15 +106,18 @@ export default function LandingPage() {
     <Suspense fallback={<div>Loading...</div>}>
       <div
         style={{ height: '100vh' }}
-        className="flexjustify-center items-center"
+        className="flex-col justify-center items-center"
       >
-        <div className="flex flex-col justify-center items-center bg-white bg-opacity-50 backdrop-filter backdrop-blur-md aspect-w-1 aspect-h-1 py-5 px-4">
-          <img
-            src="LGFiveDayLabel.gif"
-            height={'15%'}
-            width={'17.6%'}
-            className="rounded-lg"
-          />
+        <div className="flex flex-col justify-center items-center bg-white bg-opacity-50 backdrop-filter backdrop-blur-md aspect-w-1 aspect-h-1 py-5 px-4 mt-20">
+          <div className="flex flex-row justify-center items-center">
+            <img
+              src="LGFiveDayLabel.gif"
+              height={'150px'}
+              width={'200px'}
+              className="rounded-lg"
+            />
+          </div>
+
           <Search
             // landing={!searchResults.length}
             onResults={setSearchResults}
@@ -110,9 +125,24 @@ export default function LandingPage() {
             onChange={handleCityInput}
           />
         </div>
-        <div className="flex flex-wrap grid sm:grid-cols-5 gap-2 m-2 justify-center">
-          {searchResults}
-        </div>
+        {searchResults.length > 0 ? (
+          <Typography variant="h6" className="mt-3">
+            {city}
+          </Typography>
+        ) : null}
+        {windowWidth <= 768 ? (
+          <div className="flex w-80 justify-center items-center m-auto my-5 flex w-80 justify-center">
+            <Carousel loop="true" className="overflow-auto scrollbar-hide">
+              {searchResults.map((result, index) => (
+                <div key={index}>{result}</div>
+              ))}
+            </Carousel>
+          </div>
+        ) : (
+          <div className="flex flex-wrap grid sm:grid-cols-5 gap-2 m-2 justify-center">
+            {searchResults}
+          </div>
+        )}
       </div>
     </Suspense>
   );

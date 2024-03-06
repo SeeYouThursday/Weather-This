@@ -1,4 +1,4 @@
-import { Navbar, Typography, Avatar } from '@material-tailwind/react';
+import { Navbar, Avatar } from '@material-tailwind/react';
 import LoginBtn from './LoginBtn';
 // import webPLogo from '../../public/WeatherThisLogoWP.webp';
 // import LogoPng from '../assets/images/WeatherThisLogoPNG.png';
@@ -22,14 +22,7 @@ export default function WeatherNav() {
               alt="Weather This App Logo"
               className="p-2"
             />
-            <Typography
-              variant="h3"
-              color="gray"
-              gradient="true"
-              className="mb-0.5"
-            >
-              WEATHER THIS
-            </Typography>{' '}
+            <h3 className="mb-0.5">WEATHER THIS</h3>
           </div>
           <p className="text-white-500">
             {' '}

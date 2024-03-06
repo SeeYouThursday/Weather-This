@@ -7,3 +7,11 @@
   flex-direction: column; */
   height: 100vh;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none; /* For Firefox */
+}
