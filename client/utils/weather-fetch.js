@@ -1,9 +1,4 @@
-//! TODO:
-//?? Rewrite GeoLocateAPI
-// import dotenv from 'dotenv';
-// dotenv.config();
 const weatherApiKey = import.meta.env.VITE_WEATHER_API;
-// const weatherApiKey = process.env.VITE_WEATHER_API;
 
 const fetchingData = async (api) => {
   const response = await fetch(api);
@@ -28,13 +23,13 @@ export const geoLocateAPI = async (city) => {
       const coords = { lat, long };
       console.log(coords);
       return coords;
-      // return fiveDayForecast(long, lat);
     }
   } catch (err) {
     console.error(err);
   }
 };
-export async function fiveDayForecast(lat, long) {
+
+export const fiveDayForecast = async (lat, long) => {
   //   api kept switching up lat and longs, so the variables have been switched
   const fiveDayForecast = `https://api.openweathermap.org/data/2.5/forecast/?lat=${lat}&lon=${long}&appid=${weatherApiKey}&units=imperial`;
 
@@ -45,8 +40,4 @@ export async function fiveDayForecast(lat, long) {
   } catch (err) {
     console.error(err);
   }
-  // await function (data) {
-  //     let weatherDataArray = data.list;
-  //     renderFiveDayLoop(weatherDataArray);
-  //   });
-}
+};

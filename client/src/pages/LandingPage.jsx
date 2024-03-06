@@ -1,48 +1,54 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { geoLocateAPI, fiveDayForecast } from '../../utils/weather-fetch';
 import dayjs from 'dayjs';
 import { Input } from '@material-tailwind/react';
 import WeatherCard from '../components/WeatherCard';
+import PropTypes from 'prop-types';
 
-function Search({ landing, onResults, weatherCards, onChange }) {
-  const [isFormVisible, setFormVisible] = useState(true);
-
+function Search({ onResults, weatherCards, onChange }) {
+  // const [isFormVisible, setFormVisible] = useState(true);
+  //  removed landing prop to keep search bar available
   const handleSubmit = async (e) => {
     e.preventDefault();
     const cards = await weatherCards();
     onResults(cards);
-    if (landing) {
-      setFormVisible(false);
-    }
+    // if (landing) {
+    //   setFormVisible(false);
+    // }
+  };
+
+  Search.propTypes = {
+    landing: PropTypes.bool.isRequired,
+    onResults: PropTypes.func.isRequired,
+    weatherCards: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
   };
 
   return (
-    isFormVisible && (
-      <div className="flex flex-col justify-center">
-        <div className="flex justify-center">
-          <form
-            method="post"
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 3,
-              padding: '5px 5px 0px 3px',
-              margin: 2,
-              display: 'flex',
-            }}
-            onSubmit={handleSubmit}
-          >
-            <Input
-              variant="standard"
-              color="blue"
-              label="Search"
-              placeholder="Enter City, State, or Zip"
-              icon={<i className="fas fa-heart" />}
-              onChange={onChange}
-            />
-          </form>
-        </div>
+    <div className="flex flex-col justify-center">
+      <div className="flex justify-center">
+        <form
+          method="post"
+          style={{
+            backgroundColor: 'white',
+            borderRadius: 3,
+            padding: '5px 5px 0px 3px',
+            margin: 2,
+            display: 'flex',
+          }}
+          onSubmit={handleSubmit}
+        >
+          <Input
+            variant="standard"
+            color="blue"
+            label="Search"
+            placeholder="Enter City, State, or Zip"
+            icon={<i className="fas fa-heart" />}
+            onChange={onChange}
+          />
+        </form>
       </div>
-    )
+    </div>
   );
 }
 
@@ -86,13 +92,24 @@ export default function LandingPage() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div style={{ height: '100vh' }} className="flex flex-col justify-center">
-        <Search
-          landing={!searchResults.length}
-          onResults={setSearchResults}
-          weatherCards={() => fetchWeatherData(city)}
-          onChange={handleCityInput}
-        />
+      <div
+        style={{ height: '100vh' }}
+        className="flexjustify-center items-center"
+      >
+        <div className="flex flex-col justify-center items-center bg-white bg-opacity-50 backdrop-filter backdrop-blur-md aspect-w-1 aspect-h-1 py-5 px-4">
+          <img
+            src="LGFiveDayLabel.gif"
+            height={'15%'}
+            width={'17.6%'}
+            className="rounded-lg"
+          />
+          <Search
+            // landing={!searchResults.length}
+            onResults={setSearchResults}
+            weatherCards={() => fetchWeatherData(city)}
+            onChange={handleCityInput}
+          />
+        </div>
         <div className="flex flex-wrap grid sm:grid-cols-5 gap-2 m-2 justify-center">
           {searchResults}
         </div>
