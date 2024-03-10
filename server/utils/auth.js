@@ -1,50 +1,42 @@
-// const { GraphQLError } = require('graphql');
 import { GraphQLError } from 'graphql';
-// const jwt = require('jsonwebtoken');
 import jwt from 'jsonwebtoken';
-// set token secret and expiration date
-import 'dotenv/config';
-const secret = 'poopypants';
-const expiration = '2h'; //!Keep for Brian's testing!
+import jwksClient from 'jwks-rsa';
 
-// const secret = process.env.secret;
-// const expiration = process.env.expiration;
+// const secret = import.meta.env.secret;
+// const expiration = import.meta.env.expiration;
+
+// Your Auth0 domain
+const auth0Domain = `dev-d4jiv6bsx28qa518.us.auth0.com`;
+
+// Initialize the JWKS client
+const client = jwksClient({
+  jwksUri: `https://${auth0Domain}/.well-known/jwks.json`,
+});
+
+function getKey(header, callback) {
+  client.getSigningKey(header.kid, function (err, key) {
+    var signingKey = key.getPublicKey || key.rsaPublicKey;
+    callback(null, signingKey);
+  });
+}
+
+const options = {
+  audience: 'https://dev-d4jiv6bsx28qa518.us.auth0.com/api/v2/',
+  issuer: `https://${auth0Domain}/`,
+  algorithms: ['RS256'],
+};
 
 export default {
-  // function for our authenticated routes
-  authMiddleware: function ({ req }) {
-    // allows token to be sent via  req.query, req.body, or headers
-    let token = req.body.token || req.query.token || req.headers.authorization;
-
-    // ["Bearer", "<tokenvalue>"]
-    if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
-    }
-    // if no token passed, return the req
-    if (!token) {
-      return req;
-    }
-
-    // verify token and get user data out of it
-    try {
-      const { data } = jwt.verify(token, secret, { maxAge: expiration });
-      req.user = data;
-    } catch {
-      console.log('Invalid token');
-    }
-
-    // return the request object,
-    // which is then passed to the resolver as `context`
-    return req;
+  authMiddleware: ({ req }) => {
+    const token = req.headers.authorization;
+    const user = new Promise((resolve, reject) => {
+      jwt.verify(token, getKey, options, (err, decoded) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(decoded.email);
+      });
+    });
+    return { user };
   },
-  signToken: function ({ username, _id }) {
-    const payload = { username, _id };
-
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-  },
-  AuthenticationError: new GraphQLError('Could not authenticate user.', {
-    extensions: {
-      code: 'UNAUTHENTICATED',
-    },
-  }),
 };

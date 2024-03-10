@@ -104,11 +104,11 @@ export default function LandingPage() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div
-        style={{ height: '100vh' }}
-        className="flex-col justify-center items-center"
-      >
-        <div className="flex flex-col justify-center items-center bg-white bg-opacity-50 backdrop-filter backdrop-blur-md aspect-w-1 aspect-h-1 py-5 px-4 mt-20">
+      <div className="flex-col justify-center items-center m-auto">
+        <div
+          className="flex flex-col justify-center items-center bg-white bg-opacity-50 backdrop-filter backdrop-blur-md aspect-w-1 aspect-h-1 py-5 px-4 mt-20"
+          style={{ height: '50vh' }}
+        >
           <div className="flex flex-row justify-center items-center">
             <img
               src="LGFiveDayLabelMinified.gif"

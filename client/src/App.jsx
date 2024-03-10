@@ -39,7 +39,6 @@ const style = {
   background: {
     backgroundColor: '#003362',
     height: '90vh',
-    zIndex: -1,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -51,7 +50,6 @@ function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <ApolloProvider client={client}>
-        {' '}
         <WeatherNav />
         <div style={style.background}>
           <Outlet />

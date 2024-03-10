@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import WeatherCard from '../components/WeatherCard';
 import {
   Card,
@@ -9,49 +8,32 @@ import {
   CardHeader,
 } from '@material-tailwind/react';
 
-// const Dashboard = () => {
-//   const [cities, setCities] = useState([]); // Fix: Corrected the variable name from setCites to setCities
-//   return (
-//     <>
-//       <WeatherCard />
-//     </>
-//   );
-// };
-
-// export default Dashboard;
-
-// Profile.js
-import React, { useEffect } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-
-const SAVE_USER = gql`
-  mutation SaveUser($user: UserInput!) {
-    saveUser(user: $user) {
-      id
-    }
-  }
-`;
-
-function Profile() {
-  const { user, isAuthenticated } = useAuth0();
-  const [saveUser] = useMutation(SAVE_USER);
+// import { useQuery } from '@apollo/client';
+// import { QUERY_ME } from '../../utils/queries';
+// const { data, loading } = useQuery(QUERY_ME);
+function Dashboard() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const navigate = useNavigate();
+  // const { data, loading } = useQuery(QUERY_ME);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      saveUser({ variables: { user } });
+    if (!isLoading && !isAuthenticated) {
+      navigate('/login');
     }
-  }, [user, isAuthenticated, saveUser]);
+  }, [isAuthenticated, isLoading, navigate]);
 
   return (
     isAuthenticated && (
-      <div>
+      <Card>
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
-      </div>
+      </Card>
     )
   );
 }
 
-export default Profile;
+export default Dashboard;

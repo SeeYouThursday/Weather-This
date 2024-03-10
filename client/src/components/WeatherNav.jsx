@@ -1,9 +1,12 @@
-import { Navbar, Avatar } from '@material-tailwind/react';
+import { Navbar, Avatar, Button } from '@material-tailwind/react';
 import LoginBtn from './LoginBtn';
-// import webPLogo from '../../public/WeatherThisLogoWP.webp';
+import LogoutBtn from './LogoutBtn'; // import webPLogo from '../../public/WeatherThisLogoWP.webp';
 // import LogoPng from '../assets/images/WeatherThisLogoPNG.png';
+import { useAuth0 } from '@auth0/auth0-react';
+
 //?? Actual Export of Component
 export default function WeatherNav() {
+  const { isAuthenticated } = useAuth0();
   return (
     <div>
       <Navbar
@@ -30,7 +33,17 @@ export default function WeatherNav() {
           </p>
         </div>
         <div className="flex">
-          <LoginBtn />
+          {isAuthenticated ? (
+            <>
+              <a href="/dashboard">
+                <Button variant="text">Dashboard</Button>
+              </a>
+
+              <LogoutBtn />
+            </>
+          ) : (
+            <LoginBtn />
+          )}
         </div>
       </Navbar>{' '}
     </div>
