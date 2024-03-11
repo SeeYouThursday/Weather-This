@@ -71,7 +71,7 @@ export default function WeatherCard({
             Wind: {wind} mph
           </Typography>
           <Typography variant="h6" color="blue-gray">
-            Humidity: {humidity}
+            Humidity: {humidity}%
           </Typography>
         </CardBody>
       </Card>

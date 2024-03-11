@@ -21,12 +21,13 @@ function Dashboard() {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      navigate('/login');
+      navigate('/');
     }
   }, [isAuthenticated, isLoading, navigate]);
 
   return (
-    isAuthenticated && (
+    isAuthenticated &&
+    !isLoading && (
       <Card>
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>

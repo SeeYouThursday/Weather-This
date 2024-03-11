@@ -1,6 +1,9 @@
 import { useState, useEffect, Suspense } from 'react';
-import { geoLocateAPI, fiveDayForecast } from '../../utils/weather-fetch';
-import dayjs from 'dayjs';
+import {
+  geoLocateAPI,
+  fiveDayForecast,
+  calcHighTemp,
+} from '../../utils/weather-fetch';
 import { Input, Carousel, Typography } from '@material-tailwind/react';
 import WeatherCard from '../components/WeatherCard';
 import PropTypes from 'prop-types';
@@ -74,24 +77,32 @@ export default function LandingPage() {
       const weatherData = await fiveDayForecast(coords.lat, coords.long);
       const weatherList = weatherData.list;
 
-      const todaysDate = dayjs().format('(M/D/YYYY)');
+      const maxTemps = calcHighTemp(weatherList);
       const filteredWeatherData = weatherList.filter((element) => {
-        let date = element.dt_txt.split(' ')[0];
-        let time = element.dt_txt.split(' ')[1];
-        return date !== todaysDate && time === '15:00:00';
+        const date = new Date(element.dt * 1000).toISOString().split('T')[0];
+        const maxTempData = maxTemps.find((temp) => temp.date === date);
+
+        // If maxTempData is undefined, return false to exclude this element from the filtered array
+        if (!maxTempData) {
+          return false;
+        }
+
+        return element.main.temp === maxTempData.maxTemp;
       });
 
-      return filteredWeatherData.map((date) => (
-        <WeatherCard
-          key={date.dt}
-          date={date.dt_txt}
-          temp={date.main.temp}
-          wind={date.wind.speed}
-          humidity={date.main.humidity}
-          icon={date.weather[0].icon}
-          description={date.weather[0].description}
-        />
-      ));
+      return filteredWeatherData
+        .slice(0, 5)
+        .map((data) => (
+          <WeatherCard
+            key={data.dt}
+            date={new Date(data.dt * 1000).toISOString()}
+            temp={data.main.temp}
+            wind={data.wind.speed}
+            humidity={data.main.humidity}
+            icon={data.weather[0].icon}
+            description={data.weather[0].description}
+          />
+        ));
     } catch (err) {
       console.log(err);
     }
@@ -115,6 +126,7 @@ export default function LandingPage() {
               height={'150px'}
               width={'200px'}
               className="rounded-lg"
+              alt="Five Day Forecast"
             />
           </div>
 

@@ -41,3 +41,35 @@ export const fiveDayForecast = async (lat, long) => {
     console.error(err);
   }
 };
+
+export const calcHighTemp = (data) => {
+  // Split the data into separate days
+  const splitDays = data.reduce((acc, curr) => {
+    const date = new Date(curr.dt * 1000); // Convert Unix timestamp to JavaScript Date
+    const dateStr = date.toISOString().split('T')[0]; // Convert Date to YYYY-MM-DD format
+
+    if (!acc[dateStr]) {
+      acc[dateStr] = []; // Initialize a new array for this date if it doesn't exist yet
+    }
+
+    acc[dateStr].push({ time: date, temp: curr.main.temp }); // Add the time and temperature to the array for this date
+
+    return acc;
+  }, {});
+
+  // Calculate the max temperature for each day and the time it occurred
+  const maxTemps = Object.entries(splitDays).map(([date, temps]) => {
+    const maxTempData = temps.reduce(
+      (max, curr) => (curr.temp > max.temp ? curr : max),
+      { temp: -Infinity }
+    );
+
+    return {
+      date,
+      time: maxTempData.time,
+      maxTemp: maxTempData.temp,
+    };
+  });
+
+  return maxTemps;
+};
