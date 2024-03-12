@@ -19,8 +19,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedCities: {
-      type: String,
+    savedSearches: {
+      type: [String],
       trim: true,
     },
   },

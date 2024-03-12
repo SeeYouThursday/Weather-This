@@ -5,8 +5,13 @@ import {
   calcHighTemp,
 } from '../../utils/weather-fetch';
 import { Input, Carousel, Typography } from '@material-tailwind/react';
+import DotLoader from 'react-spinners/DotLoader';
 import WeatherCard from '../components/WeatherCard';
+import SavedSearches from '../components/SavedSearches';
 import PropTypes from 'prop-types';
+
+import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../../utils/queries';
 
 function useWindowWidth() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -70,7 +75,7 @@ export default function LandingPage() {
   const [searchResults, setSearchResults] = useState([]);
   const [city, setCity] = useState('');
   const windowWidth = useWindowWidth();
-
+  const { data, loading } = useQuery(QUERY_ME);
   const fetchWeatherData = async (city) => {
     try {
       const coords = await geoLocateAPI(city);
@@ -129,6 +134,12 @@ export default function LandingPage() {
               alt="Five Day Forecast"
             />
           </div>
+          {data ? (
+            <>
+              <DotLoader loading={loading} />
+              <SavedSearches search={data.SavedSearches} />
+            </>
+          ) : null}
 
           <Search
             // landing={!searchResults.length}

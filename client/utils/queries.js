@@ -4,7 +4,7 @@ export const QUERY_ME = gql`
 query me {
     _id
     email
-    savedCities
+    savedSearches
 }`;
 
 // export const QUERY_CITIES = ``;

@@ -1,11 +1,15 @@
+// UI Imports
 import {
   Card,
   CardBody,
   Typography,
   CardHeader,
 } from '@material-tailwind/react';
-import dayjs from 'dayjs';
 import five_day from '../assets/images/5dayAsset.avif';
+// Time utility
+import dayjs from 'dayjs';
+//Auth Import
+import { useAuth0 } from '@auth0/auth0-react';
 import PropTypes from 'prop-types';
 
 WeatherCard.propTypes = {
