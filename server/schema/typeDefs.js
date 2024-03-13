@@ -2,22 +2,23 @@ const typeDefs = `
 type User {
     _id: ID
     email: String
-    password: String
-    savedCities: [String] # //??Should the array here use a schema to store extra data i.e. lat/long
+    user_id: String!
+    savedCities: [String] 
 }
 
 type Auth {
     token: ID
-    user: User
+    user: [User]
 }
 
 type Query {
     me: User
+    users: User
 }
 
 type Mutation {
-    addUser(email: String, password: String): Auth
-    login(email: String, password: String): Auth
+    addUser(email: String, user_id: String): User
+    saveCity(city: String): User
 }`;
 
 export default typeDefs;

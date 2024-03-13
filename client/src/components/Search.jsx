@@ -7,8 +7,6 @@ import { useState } from 'react';
 // import WeatherCard from './WeatherCard';
 
 export default function Search({ landing, onResults, weatherCards, onChange }) {
-  // const [city, setCity] = useState('');
-  // const [weatherCardsData, setWeatherCardsData] = useState([]);
   const [isFormVisible, setFormVisible] = useState(true);
 
   //Handles submit and setting state for rendering cards
@@ -54,34 +52,3 @@ export default function Search({ landing, onResults, weatherCards, onChange }) {
     </>
   );
 }
-
-//!Logic moved to parent
-//Handles change in input
-// const handleCityInput = (e) => {
-//   const newCity = e.target.value.trim();
-//   setCity(newCity);
-// };
-
-//Logic to render cards based on fetch req to OpenWeather
-// const weatherCards = async () => {
-//   try {
-//     const coords = await geoLocateAPI(city);
-//     const { lat, long } = coords;
-//     const weatherData = await fiveDayForecast(lat, long);
-//     const weatherList = weatherData.list;
-
-//     const todaysDate = dayjs().format('(M/D/YYYY)');
-//     const filteredWeatherData = weatherList.filter((element) => {
-//       let date = element.dt_txt.split(' ')[0];
-//       let time = element.dt_txt.split(' ')[1];
-//       return date !== todaysDate && time === '15:00:00';
-//     });
-
-//     return filteredWeatherData.map((date) => (
-//       <WeatherCard key={date.dt} date={date.dt_txt} temp={date.main.temp} />
-//     ));
-//   } catch (err) {
-//     console.log(err);
-//     //!Render form error later
-//   }
-// };

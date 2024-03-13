@@ -37,8 +37,8 @@ const client = new ApolloClient({
 
 const style = {
   background: {
-    backgroundColor: '#003362',
-    height: '90vh',
+    // backgroundColor: '#003362',
+    height: '80vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

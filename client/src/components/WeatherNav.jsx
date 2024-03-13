@@ -8,7 +8,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 //?? Actual Export of Component
 export default function WeatherNav() {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
   return (
     <div>
       <Navbar
@@ -37,7 +37,7 @@ export default function WeatherNav() {
           </p>
         </div>
         <div className="flex">
-          {isAuthenticated ? (
+          {isAuthenticated && !isLoading ? (
             <>
               <a href="/dashboard">
                 <Button variant="text">Dashboard</Button>
