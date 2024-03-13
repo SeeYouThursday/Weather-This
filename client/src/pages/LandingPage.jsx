@@ -5,11 +5,12 @@ import {
   calcHighTemp,
 } from '../../utils/weather-fetch';
 import { Input, Carousel, Typography } from '@material-tailwind/react';
+import FavBtn from '../components/FavBtn';
 import DotLoader from 'react-spinners/DotLoader';
 import WeatherCard from '../components/WeatherCard';
 import SavedSearches from '../components/SavedSearches';
 import PropTypes from 'prop-types';
-
+import { useAuth0 } from '@auth0/auth0-react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
 
@@ -76,6 +77,7 @@ export default function LandingPage() {
   const [city, setCity] = useState('');
   const windowWidth = useWindowWidth();
   const { data, loading } = useQuery(QUERY_ME);
+  const { isAuthenticated, isLoading } = useAuth0();
   const fetchWeatherData = async (city) => {
     try {
       const coords = await geoLocateAPI(city);
@@ -149,9 +151,16 @@ export default function LandingPage() {
           />
         </div>
         {searchResults.length > 0 ? (
-          <Typography variant="h6" className="mt-3">
-            {city}
-          </Typography>
+          <div className="container">
+            <Typography variant="h6" className="mt-3">
+              {city}
+            </Typography>
+            {isAuthenticated && !isLoading ? (
+              <>
+                <FavBtn city={city} />
+              </>
+            ) : null}
+          </div>
         ) : null}
         {windowWidth <= 768 ? (
           <div className="flex w-80 justify-center items-center m-auto my-5 flex w-80 justify-center">

@@ -2,7 +2,7 @@ const typeDefs = `
 type User {
     _id: ID
     email: String
-    user_id: String!
+    user_id: String
     savedCities: [String] 
 }
 
@@ -13,7 +13,7 @@ type Auth {
 
 type Query {
     me: User
-    users: User
+    users: [User]
 }
 
 type Mutation {

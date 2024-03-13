@@ -6,14 +6,19 @@ import { useAuth0 } from '@auth0/auth0-react';
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
+      console.log('context.user:', context.user);
       if (context.user) {
-        const data = await User.findOne({ user_id: context.user._id }).select(
-          '-__v'
-        );
-
-        return data;
+        try {
+          const data = await User.findOne({
+            user_id: context.user._id,
+          }).select('-__v');
+          console.log('User data:', data);
+          return data;
+        } catch (err) {
+          console.log('Error:', err);
+        }
       } else {
-        throw Auth.AuthenticationError('You need to be logged in');
+        console.log('You need to be logged in');
       }
     },
     users: async (_, args) => {

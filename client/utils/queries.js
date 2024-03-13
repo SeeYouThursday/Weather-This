@@ -4,6 +4,7 @@ export const QUERY_ME = gql`
 query me {
     _id
     email
+    user_id
     savedCities
 }`;
 
